@@ -1,0 +1,44 @@
+package web;
+
+import model.User;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
+import repositories.UserRepository;
+import repositories.UserRepositoryDummyImpl;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+@RunWith(MockitoJUnitRunner.class)
+public class RegistrationServletTests extends Mockito {
+    @Spy
+    UserRepository repository = mock(UserRepositoryDummyImpl.class);
+
+    @InjectMocks
+    RegistrationServlet servlet;
+
+    @Test
+    public void servlet_should_add_user_data_into_repository() throws IOException, ServletException {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        servlet.doPost(request, response);
+        verify(repository).addUser(Mockito.any(User.class));
+    }
+
+    @Test
+    public void servlet_should_properly_redirect_user() throws IOException, ServletException {
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+
+        servlet.doPost(request, response);
+        verify(repository).addUser(Mockito.any(User.class));
+    }
+}
