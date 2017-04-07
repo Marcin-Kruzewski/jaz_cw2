@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class UserRepositoryDummyImplTests {
+public class UserRepositoryDummyImplTest {
 
     private static UserRepository repository;
     private static User user1, user2, user3;

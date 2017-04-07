@@ -22,16 +22,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LoginAndRegistrationPageFilterTests {
+public class AdminPageFilterTest {
 
     @InjectMocks
-    LoginAndRegistrationPageFilter filter;
+    AdminPageFilter filter;
 
     @Test
-    public void should_redirect_authorized_user_to_profile_page() throws IOException, ServletException {
+    public void should_redirect_premium_user_to_access_denied_page() throws IOException, ServletException {
 
         User user = new User();
-        user.setRole(RoleEnum.USER);
+        user.setRole(RoleEnum.PREMIUM);
 
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
@@ -41,7 +41,7 @@ public class LoginAndRegistrationPageFilterTests {
 
         filter.doFilter(request, response, null);
 
-        verify(response).sendRedirect("profile");
+        verify(response).sendRedirect("accessDenied.jsp");
     }
 }
 

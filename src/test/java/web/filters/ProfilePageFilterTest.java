@@ -1,6 +1,5 @@
 package web.filters;
 
-import model.RoleEnum;
 import model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,26 +21,21 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AdminPageFilterTests {
+public class ProfilePageFilterTest {
 
     @InjectMocks
-    AdminPageFilter filter;
+    ProfilePageFilter filter;
 
     @Test
-    public void should_redirect_premium_user_to_access_denied_page() throws IOException, ServletException {
-
-        User user = new User();
-        user.setRole(RoleEnum.PREMIUM);
-
+    public void should_redirect_unauthorized_user_to_access_denied_page() throws IOException, ServletException {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         HttpSession session = mock(HttpSession.class);
         when(request.getSession()).thenReturn(session);
-        when(session.getAttribute("user")).thenReturn(user);
+        when(session.getAttribute("user")).thenReturn(null);
 
         filter.doFilter(request, response, null);
 
         verify(response).sendRedirect("accessDenied.jsp");
     }
 }
-

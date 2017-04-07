@@ -22,13 +22,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PremiumPageFilterTests {
+public class LoginAndRegistrationPageFilterTest {
 
     @InjectMocks
-    PremiumPageFilter filter;
+    LoginAndRegistrationPageFilter filter;
 
     @Test
-    public void should_redirect_not_premium_user_to_access_denied_page() throws IOException, ServletException {
+    public void should_redirect_authorized_user_to_profile_page() throws IOException, ServletException {
 
         User user = new User();
         user.setRole(RoleEnum.USER);
@@ -41,7 +41,7 @@ public class PremiumPageFilterTests {
 
         filter.doFilter(request, response, null);
 
-        verify(response).sendRedirect("accessDenied.jsp");
+        verify(response).sendRedirect("profile");
     }
 }
 
