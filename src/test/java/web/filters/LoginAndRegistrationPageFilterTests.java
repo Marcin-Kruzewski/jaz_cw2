@@ -41,7 +41,7 @@ public class LoginAndRegistrationPageFilterTests {
 
         filter.doFilter(request, response, null);
 
-        verify(response).sendRedirect("profile.jsp");
+        verify(response).sendRedirect("profile");
     }
 }
 
